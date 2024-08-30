@@ -1,38 +1,185 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Top-Bar {
+  border-width: 1px;
+  border-style: solid;
+  background-color: white;
+  border-color: #E5E5E5;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 8vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; 
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.Logo-Container {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100%;
+  width: 100%;
+}
+
+.Container-Logo {
+  width: 15vh;
+  height: 15vh;
+}
+
+.WebApp-Body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  width: calc(100% - 8vw); 
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.Content-Container {
+  flex:1;
+  display: flex;
+  width: 100%;
+  height: 50%;
+}
+
+.Table-Container {
+  flex: 1;
+  overflow-y: auto; 
+  padding: 1rem;
+  box-sizing: border-box;
+  border-right: 1px solid #E5E5E5; 
+}
+
+.Calendar-Container {
+  flex: 1; 
+  padding: 1rem;
+  box-sizing: border-box;
+  border: 2px solid black;
+  border-radius: 15px;
+  height: 43vh;
+  background-color: #FCA311;
+}
+
+.Calendar-Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #14213D;
+  color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.Calendar-Grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.Calendar-Grid-Header {
+  text-align: center;
+  background-color: #E5E5E5;
+  padding: 0.5rem;
+}
+
+.Calendar-Day {
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid #E5E5E5;
+}
+
+.Calendar-Day.filled {
+  background-color: #FCA311;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.Table-Classes { 
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.Table-Classes-Header {
+  background-color: #14213D;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Table-Classes-Rows {
+  color: black;
+  background-color: #FCA311;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Circle-Text {
+  font-size: 1.56rem; 
+  fill: #333;
+  font-weight: bold;
+  text-anchor: middle;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.Content-Container-Parte-Inferior{
+  flex:1;
+  display: flex;
+  width: 100%;
+  height: 50%;
+  flex-direction: row;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.sliding-button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.Container-Images-For-Slider{
+  flex:1;
+  border-width: 1px;
+  border-style: solid;
+  border-color: red;
+  background-color: red;
+}
+
+.text {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-in {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slide-out {
+  transform: translateX(-100%);
+  opacity: 0;
 }
