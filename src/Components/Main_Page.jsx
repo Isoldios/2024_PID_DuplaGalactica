@@ -57,31 +57,46 @@ const Calendar = () => {
   };
 
 export default function Main_Page() {
-    const [position, setPosition] = useState(0);
-    const moveObject = () => {
-        const screenWidth = window.innerWidth;
-        setPosition(position-screenWidth); 
-    };
-    return (
-      <div className="App">
-        <div className='Left-Bar'>
-          <div className='Logo-Container'>
-            <svg className='Container-Logo' viewBox="0 0 220 210">
-              <defs>
-                <path id="circlePath" d="M 110,100 m -90,0 a 90,90 0 1,1 180,0 a 90,90 0 1,1 -180,0" />
-              </defs>
-              <circle cx="100" cy="100" r="90" fill="#14213D" />
-              <image href="/LogoGymGenius.png" x="10" y="10" height="180" width="180" />
-              <text>
-                <textPath href="#circlePath" className="Circle-Text">
-                  GymGenius GymGenius GymGenius GymGenius GymGenius GymGenius GymGenius GymGenius
-                </textPath>
-              </text>
-            </svg>
-          </div>
+  const [classes, setClasses] = useState([]);
+
+  // Función para obtener los datos desde la API Flask
+  const fetchClasses = async () => {
+    console.log("hola")
+    try {
+      const response = await fetch('http://localhost:5000/categoria');
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Datos recibidos:", data);  // Agrega esto para ver los datos en la consola
+        setClasses(data);
+      } else {
+        console.error("Error en la respuesta de la API:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching classes:", error);
+    }
+  };
+  
+  return (
+    <div className="App">
+      <div className='Left-Bar'>
+        <div className='Logo-Container'>
+          <svg className='Container-Logo' viewBox="0 0 220 210">
+            <defs>
+              <path id="circlePath" d="M 110,100 m -90,0 a 90,90 0 1,1 180,0 a 90,90 0 1,1 -180,0" />
+            </defs>
+            <circle cx="100" cy="100" r="90" fill="#14213D" />
+            <image href="/LogoGymGenius.png" x="10" y="10" height="180" width="180" />
+            <text>
+              <textPath href="#circlePath" className="Circle-Text">
+                GymGenius GymGenius GymGenius GymGenius GymGenius GymGenius GymGenius GymGenius
+              </textPath>
+            </text>
+          </svg>
         </div>
-        <div className="WebApp-Body">
-          <div className="Content-Container">
+      </div>
+      <div className="WebApp-Body">
+        <div className="Content-Container">
+            {classes.length > 0 ? (
             <div className="Table-Container">
               <table className="Table-Classes">
                 <thead className="Table-Classes-Header">
@@ -92,110 +107,31 @@ export default function Main_Page() {
                   </tr>
                 </thead>
                 <tbody className="Table-Classes-Rows">
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
-                  <tr>
-                    <td>Row 1, Col 1</td>
-                    <td>Row 1, Col 2</td>
-                    <td>Row 1, Col 3</td>
-                  </tr>
+                  {classes.map((clase, index) => (
+                    <tr key={index}>
+                      <td>{clase.Name}</td>
+                      <td>{clase.Hour}</td>
+                      <td>{clase.Date}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            <Calendar />
-          </div>
-          <div className="Content-Container-Parte-Inferior">
-            <img src="/Spining.jpg" className="Image-MainMenu-Slider" />
-            <div className="Text-MainMenu-Slider">Texto a gusto numero 1 aaaaaaaaa aaaaaaaaaaaasa aa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa     a</div>
-            <img src="/yoga.png" className="Image-MainMenu-Slider"/>
-            <div className="Text-MainMenu-Slider">Texto a gusto numero 2 aaaaaaaaa aaaaaaaaaaaasa aa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa     a</div>
-            <img src="/Boxeo.jpeg" className="Image-MainMenu-Slider" />
-            <div className="Text-MainMenu-Slider">Texto a gusto numero 3 aaaaaaaaa aaaaaaaaaaaasa aa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa     a</div>
-            </div>
+          ) : (
+            <p>No hay clases disponibles aún.</p>
+          )}
+          <Calendar />
+        </div>
+        <div className="Content-Container-Parte-Inferior">
+          <img src="/Spining.jpg" className="Image-MainMenu-Slider" />
+          <div className="Text-MainMenu-Slider">aaa</div>
+          <img src="/yoga.png" className="Image-MainMenu-Slider"/>
+          <div className="Text-MainMenu-Slider">Texto a gusto numero 2</div>
+          <img src="/Boxeo.jpeg" className="Image-MainMenu-Slider" />
+          <div className="Text-MainMenu-Slider">Texto a gusto numero 3</div>
         </div>
       </div>
-    );
+      <button onClick={fetchClasses}>Obtener Clases</button> 
+    </div>
+  );
 }
