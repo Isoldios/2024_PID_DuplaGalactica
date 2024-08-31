@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+// Componente del calendario
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [daysInMonth, setDaysInMonth] = useState([]);
@@ -57,14 +58,28 @@ const Calendar = () => {
   );
 };
 
+// Componente principal de la aplicación
 function App() {
-  const [position, setPosition] = useState(0);
-
   
-  const moveObject = () => {
-    const screenWidth = window.innerWidth;
-    setPosition(position-screenWidth); 
+  const [classes, setClasses] = useState([]);
+
+  // Función para obtener los datos desde la API Flask
+  const fetchClasses = async () => {
+    console.log("hola")
+    try {
+      const response = await fetch('http://localhost:5000/categoria');
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Datos recibidos:", data);  // Agrega esto para ver los datos en la consola
+        setClasses(data);
+      } else {
+        console.error("Error en la respuesta de la API:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching classes:", error);
+    }
   };
+  
   return (
     <div className="App">
       <div className='Left-Bar'>
@@ -85,120 +100,42 @@ function App() {
       </div>
       <div className="WebApp-Body">
         <div className="Content-Container">
-          <div className="Table-Container">
-            <table className="Table-Classes">
-              <thead className="Table-Classes-Header">
-                <tr>
-                  <th>Nombre</th>
-                  <th>Hora</th>
-                  <th>Fecha</th>
-                </tr>
-              </thead>
-              <tbody className="Table-Classes-Rows">
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-                <tr>
-                  <td>Row 1, Col 1</td>
-                  <td>Row 1, Col 2</td>
-                  <td>Row 1, Col 3</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            {classes.length > 0 ? (
+            <div className="Table-Container">
+              <table className="Table-Classes">
+                <thead className="Table-Classes-Header">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Hora</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody className="Table-Classes-Rows">
+                  {classes.map((clase, index) => (
+                    <tr key={index}>
+                      <td>{clase.Name}</td>
+                      <td>{clase.Hour}</td>
+                      <td>{clase.Date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p>No hay clases disponibles aún.</p>
+          )}
           <Calendar />
         </div>
         <div className="Content-Container-Parte-Inferior">
           <img src="/Spining.jpg" className="Image-MainMenu-Slider" />
-          <div className="Text-MainMenu-Slider">Texto a gusto numero 1 aaaaaaaaa aaaaaaaaaaaasa aa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa     a</div>
+          <div className="Text-MainMenu-Slider">aaa</div>
           <img src="/yoga.png" className="Image-MainMenu-Slider"/>
-          <div className="Text-MainMenu-Slider">Texto a gusto numero 2 aaaaaaaaa aaaaaaaaaaaasa aa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa     a</div>
+          <div className="Text-MainMenu-Slider">Texto a gusto numero 2</div>
           <img src="/Boxeo.jpeg" className="Image-MainMenu-Slider" />
-          <div className="Text-MainMenu-Slider">Texto a gusto numero 3 aaaaaaaaa aaaaaaaaaaaasa aa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa     a</div>
-          </div>
+          <div className="Text-MainMenu-Slider">Texto a gusto numero 3</div>
+        </div>
       </div>
+      <button onClick={fetchClasses}>Obtener Clases</button> 
     </div>
   );
 }
