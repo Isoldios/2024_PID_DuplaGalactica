@@ -58,21 +58,22 @@ const Calendar = () => {
 };
 
 function App() {
-  const [isToggled, setIsToggled] = useState(false);
+  const [position, setPosition] = useState(0);
 
-  const handleClick = () => {
-    setIsToggled(!isToggled);
+  
+  const moveObject = () => {
+    const screenWidth = window.innerWidth;
+    setPosition(position-screenWidth); 
   };
-
   return (
     <div className="App">
-      <div className='Top-Bar'>
+      <div className='Left-Bar'>
         <div className='Logo-Container'>
           <svg className='Container-Logo' viewBox="0 0 220 210">
             <defs>
               <path id="circlePath" d="M 110,100 m -90,0 a 90,90 0 1,1 180,0 a 90,90 0 1,1 -180,0" />
             </defs>
-            <circle cx="100" cy="100" r="90" fill="white" />
+            <circle cx="100" cy="100" r="90" fill="#14213D" />
             <image href="/LogoGymGenius.png" x="10" y="10" height="180" width="180" />
             <text>
               <textPath href="#circlePath" className="Circle-Text">
@@ -99,23 +100,104 @@ function App() {
                   <td>Row 1, Col 2</td>
                   <td>Row 1, Col 3</td>
                 </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
+                <tr>
+                  <td>Row 1, Col 1</td>
+                  <td>Row 1, Col 2</td>
+                  <td>Row 1, Col 3</td>
+                </tr>
               </tbody>
             </table>
           </div>
           <Calendar />
         </div>
         <div className="Content-Container-Parte-Inferior">
-          <div className="slider-container">
-            <div className="Container-Images-For-Slider">
-              <span className={`text ${isToggled ? 'slide-out' : 'slide-in'}`}>
-                <image href="/LogoGymGenius.png"/>
-              </span>
-              <span className={`text ${isToggled ? 'slide-in' : 'slide-out'}`}>
-                <image href="/LogoGymGenius.png"/>
-              </span>
-            </div>
+          <img src="/Spining.jpg" className="Image-MainMenu-Slider" />
+          <div className="Text-MainMenu-Slider">Texto a gusto numero 1 aaaaaaaaa aaaaaaaaaaaasa aa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa     a</div>
+          <img src="/yoga.png" className="Image-MainMenu-Slider"/>
+          <div className="Text-MainMenu-Slider">Texto a gusto numero 2 aaaaaaaaa aaaaaaaaaaaasa aa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa     a</div>
+          <img src="/Boxeo.jpeg" className="Image-MainMenu-Slider" />
+          <div className="Text-MainMenu-Slider">Texto a gusto numero 3 aaaaaaaaa aaaaaaaaaaaasa aa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa   aaaaaaaaaaaaaaa aaaaaaaaaaaa     a</div>
           </div>
-        </div>
       </div>
     </div>
   );
