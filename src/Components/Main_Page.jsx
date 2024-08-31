@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 const Calendar = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [daysInMonth, setDaysInMonth] = useState([]);
+    const [classResponsive, setClassResponsive] = useState('none');
   
     useEffect(() => {
       const year = currentMonth.getFullYear();
       const month = currentMonth.getMonth();
       const firstDay = new Date(year, month, 1).getDay();
       const lastDate = new Date(year, month + 1, 0).getDate();
-      
       const days = [];
       for (let i = 0; i < firstDay; i++) {
         days.push(null);
@@ -32,6 +32,7 @@ const Calendar = () => {
     const year = currentMonth.getFullYear();
   
     return (
+      
       <div className="Calendar-Container">
         <div className="Calendar-Header">
           <button onClick={handlePrevMonth}>&lt;</button>
@@ -47,11 +48,13 @@ const Calendar = () => {
           <div className="Calendar-Grid-Header">Fri</div>
           <div className="Calendar-Grid-Header">Sat</div>
           {daysInMonth.map((day, index) => (
-            <div key={index} className={`Calendar-Day ${day ? 'filled' : ''}`}>
+            <div key={index} onClick={()=>setClassResponsive('block')}
+            className={`Calendar-Day ${day ? 'filled' : ''}`}>
               {day}
             </div>
           ))}
         </div>
+        <div className='classes_responsive' onClick={()=>setClassResponsive('none')} style={{display:classResponsive}}> perro</div>
       </div>
     );
   };
@@ -97,7 +100,7 @@ export default function Main_Page() {
       <div className="WebApp-Body">
         <div className="Content-Container">
             {classes.length > 0 ? (
-            <div className="Table-Container">
+            <div className="Table-Container"> 
               <table className="Table-Classes">
                 <thead className="Table-Classes-Header">
                   <tr>
@@ -118,7 +121,9 @@ export default function Main_Page() {
               </table>
             </div>
           ) : (
+            <div className='Table-Container'>
             <p>No hay clases disponibles aún.</p>
+            </div>
           )}
           <Calendar />
         </div>
@@ -131,7 +136,7 @@ export default function Main_Page() {
           <div className="Text-MainMenu-Slider">Texto a gusto numero 3</div>
         </div>
       </div>
-      <button onClick={fetchClasses}>Obtener Clases</button> 
+      <button className='button-fetch-classes' onClick={fetchClasses}>Obtener Clases</button> 
     </div>
   );
 }

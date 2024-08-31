@@ -64,7 +64,12 @@
   width: 100%;
   height: 50%;
 }
-
+@media screen and (max-width: 768px) {
+  .Content-Container {
+    width: 75%;
+    padding-left: 12.5%;
+  }
+}
 .Table-Container {
   flex: 1;
   overflow-y: auto; 
@@ -76,6 +81,11 @@
   border-style: solid;
   border-color: black;
   border-width: 1px;
+}
+@media screen and (max-width: 768px) {
+  .Table-Container {
+    display: none;
+  }
 }
 
 .Table-Container::-webkit-scrollbar {
@@ -95,6 +105,11 @@
   border-radius: 15px;
   height: 43vh;
   background-color: #FCA311;
+}
+@media screen and (max-height: 625px) {
+  .Calendar-Container {
+    overflow-y: scroll
+  }
 }
 
 .Calendar-Header {
@@ -121,7 +136,7 @@
 
 .Calendar-Day {
   text-align: center;
-  padding: 1rem;
+  padding: 5%;
   border: 1px solid #E5E5E5;
 }
 
@@ -147,6 +162,7 @@ table {
 .Table-Classes-Rows {
   color: black;
   background-color: #FCA311;
+  text-align: center;
 }
 
 .Circle-Text {
@@ -270,4 +286,15 @@ iframe {
 }
 .login-options-create:hover {
   color: #0056b3;
+}
+@media screen and (max-width: 768px) {
+  .button-fetch-classes {
+    display: none;
+  }
+}
+.classes_responsive {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: red;
 }
