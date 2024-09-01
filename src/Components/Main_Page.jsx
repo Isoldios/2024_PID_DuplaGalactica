@@ -62,14 +62,14 @@ const Calendar = () => {
 export default function Main_Page() {
   const [classes, setClasses] = useState([]);
 
-  // Función para obtener los datos desde la API Flask
+  
   const fetchClasses = async () => {
     console.log("hola")
     try {
-      const response = await fetch('http://localhost:5000/categoria');
+      const response = await fetch('http://localhost:5000/classes');
       if (response.ok) {
         const data = await response.json();
-        console.log("Datos recibidos:", data);  // Agrega esto para ver los datos en la consola
+        console.log("Datos recibidos:", data);  
         setClasses(data);
       } else {
         console.error("Error en la respuesta de la API:", response.statusText);

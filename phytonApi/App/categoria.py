@@ -23,11 +23,15 @@ class Classes(db.Model):
     Name = db.Column(db.String(100))
     Date = db.Column(db.Date())
     Hour = db.Column(db.String(20))
+    Day = db.Column(db.String(50))
+    Permanent = db.Column(db.Boolean())
 
     def __init__(self, Name, Date,Hour):
         self.Name = Name
         self.Date = Date
         self.Hour = Hour
+        self.Day = Day
+        self.Permanent = Permanent
 
 def create_tables():
     with app.app_context():
@@ -40,7 +44,7 @@ def create_tables():
 #Esquema para interactuar con servicios
 class ClassSchema(ma.Schema):
     class Meta:
-        fields = ('Id','Name','Date','Hour')
+        fields = ('Id','Name','Date','Hour','Day','Permanent')
 
 #Unica respuesta
 class_schema = ClassSchema()
@@ -48,11 +52,26 @@ class_schema = ClassSchema()
 classes_schema = ClassSchema(many=True)
 
 #GET
-@app.route('/categoria',methods=['GET'])
+@app.route('/classes',methods=['GET'])
 def get_classes():
     all_categorias = Classes.query.all()
     result = classes_schema.dump(all_categorias)
     return jsonify(result)
+
+
+@app.route('/create_class', methods=['POST'])
+def create_class():
+    class_name = request.json.get('Name')
+    class_date = request.json.get('Date')
+    class_hour = request.json.get('Hour')
+    class_day = request.json.get('Day')
+    class_permanent = request.json.get('Permanent')
+
+    new_class = Classes(Name=class_name,Date=class_date,Hour=class_hour,Day=class_day,Permanent=class_permanent)
+    
+    db.session.add(new_class)
+    db.session.commit()
+    return classes_schema.jsonify(new_class), 201
 
 #########################################################
 #########################################################
