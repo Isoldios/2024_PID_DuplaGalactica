@@ -15,6 +15,20 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
 
+class Users(db.Model):
+    Id = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(100))
+    Lastname = db.Column(db.String(100))
+    Password = db.Column(db.String(100))
+    Birthday = db.Column(db.Date)
+    Gym = db.Column(db.String(100))
+    
+    def __init__(self, Name, Lastname,Password,Birthday,Gym):
+        self.Name = Name
+        self.Lastname = Lastname
+        self.Password = Password
+        self.Birthday = Birthday
+        self.Gym = Gym
 
 
 #Forma de definir tablas para que las conozca SQLAlchemy
@@ -46,10 +60,16 @@ class ClassSchema(ma.Schema):
     class Meta:
         fields = ('Id','Name','Date','Hour','Day','Permanent')
 
+class UsersSchema(ma.Schema):
+    class Meta:
+        fields = ('Id','Name','Lastname','Password','Birthday','Gym')
+
+
 #Unica respuesta
 class_schema = ClassSchema()
 #Varias respuestas
 classes_schema = ClassSchema(many=True)
+users_schema = UsersSchema(many=True)
 
 #GET
 @app.route('/classes',methods=['GET'])
