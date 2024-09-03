@@ -4,8 +4,8 @@ import Login from './Components/Login.jsx';
 
 function App() {
   return(
-    <Main_Page/>
-    //<Login/>
+    //<Main_Page/>
+    <Login/>
   );
 }
 
