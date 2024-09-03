@@ -1,28 +1,52 @@
 import '../App.css';
 import React, { useState } from 'react';
 
-export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+export default function CreateClass() {
+  const [hour, setHour] = useState('');
+  const [permanent, setPermanent] = useState('');
+  const [date, setDate] = useState('');
+  const [name, setName] = useState('');
 
-  const fetchUser = async () => {
+  const day = (dateString) => {
+    const date = new Date(dateString);
+    const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    return daysOfWeek[date.getDay()];
+  };
+
+  const createClass = async () => {
+    
     try {
-      const response = await fetch(`http://localhost:5000/login?Password=${password}&Mail=${username}`);
+      const response = await fetch('http://localhost:5000/create_class', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          Name: name,
+          Date: date,
+          Hour: hour,
+          Day: day(date),
+          Permanent: permanent,
+        }),
+      });
       if (response.ok) {
         const data = await response.json();
-        alert("¡Login exitoso!");
+        alert("¡Clase creada exitosamente!");
       } else {
         console.error("Error en la respuesta de la API:", response.statusText);
-        alert("Error en las credenciales");
+        alert("Error al crear la clase");
       }
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.log(name,date,hour,day(date),permanent)
+      console.error("Error en el servidor:", error);
       alert("Error en el servidor");
     }
   };
+  
 
-  const loginUser = (e) => {
-    fetchUser();
+  const postClass = (e) => {
+    e.preventDefault(); 
+    createClass();
   };
 
   return (
@@ -44,34 +68,59 @@ export default function Login() {
         </div>
       </div>
       <div className='login-container'>
-        <h2>Login</h2>
-        <form onSubmit={loginUser}>
-          <div className="input-container">
-            <label htmlFor="username">Email:</label>
-            <input 
-              type="text" 
-              id="username" 
-              name="username" 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)} 
-            />
+        <h2>Crear clase</h2>
+        <form onSubmit={postClass}>
+          <div className="input-container" style={{display:'flex', justifyContent: 'space-between'}}>
+            <div className="input-small-container">
+              <label htmlFor="hour">Hora:</label>
+              <input 
+                type="time" 
+                id="hour" 
+                name="hour" 
+                value={hour} 
+                onChange={(e) => setHour(e.target.value)} 
+              />
+            </div>
+            <div className="input-small-container">
+              <label htmlFor="name">Nombre:</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                value={name} 
+                onChange={(e) => setName(e.target.value)} 
+              />
+            </div>
           </div>
-          <div className="input-container">
-            <label htmlFor="password">Password:</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-            />
+          <div className="input-container" style={{display:'flex', justifyContent: 'space-between'}}>
+            <div className="input-small-container" style={{width:"100%"}}>
+              <label htmlFor="permanent">Permanente:</label>
+              <select 
+                id="permanent" 
+                name="permanent" 
+                value={permanent} 
+                onChange={(e) => setPermanent(e.target.value)} 
+              >
+                <option value="">Seleccionar</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div className="input-small-container" style={{ flex: 3, textAlign: 'right' }}>
+              <label htmlFor="date">Fecha:</label>
+              <input 
+                type="date" 
+                id="date" 
+                name="date" 
+                value={date} 
+                onChange={(e) => setDate(e.target.value)} 
+              />
+            </div>
           </div>
           <button type="submit" className='button_login'>
-            Ingresar
+            Crear clase
           </button>
         </form>
-        <div className='login-options-reset'>Reset Password</div>
-        <div className='login-options-create'>Create Account</div>
       </div>
     </div>
   );

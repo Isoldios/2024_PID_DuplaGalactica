@@ -44,7 +44,7 @@ class Classes(db.Model):
     Day = db.Column(db.String(50))
     Permanent = db.Column(db.Boolean())
 
-    def __init__(self, Name, Date,Hour):
+    def __init__(self, Name, Date,Hour,Day,Permanent):
         self.Name = Name
         self.Date = Date
         self.Hour = Hour
@@ -90,12 +90,15 @@ def create_class():
     class_hour = request.json.get('Hour')
     class_day = request.json.get('Day')
     class_permanent = request.json.get('Permanent')
-
+    if class_permanent=='Si':
+        class_permanent = True
+    else:
+        class_permanent = False
     new_class = Classes(Name=class_name,Date=class_date,Hour=class_hour,Day=class_day,Permanent=class_permanent)
     
     db.session.add(new_class)
     db.session.commit()
-    return classes_schema.jsonify(new_class), 201
+    return class_schema.jsonify(new_class), 201
 
 #Users
 @app.route('/login', methods=['GET'])
