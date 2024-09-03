@@ -17,13 +17,17 @@ ma = Marshmallow(app)
 
 class Users(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
+    Mail = db.Column(db.String(100))
+    Username = db.Column(db.String(100))
     Name = db.Column(db.String(100))
     Lastname = db.Column(db.String(100))
     Password = db.Column(db.String(100))
     Birthday = db.Column(db.Date)
     Gym = db.Column(db.String(100))
     
-    def __init__(self, Name, Lastname,Password,Birthday,Gym):
+    def __init__(self,Mail,Username,Name,Lastname,Password,Birthday,Gym):
+        self.Mail=Mail
+        self.Username = Username
         self.Name = Name
         self.Lastname = Lastname
         self.Password = Password
@@ -62,7 +66,7 @@ class ClassSchema(ma.Schema):
 
 class UsersSchema(ma.Schema):
     class Meta:
-        fields = ('Id','Name','Lastname','Password','Birthday','Gym')
+        fields = ('Id','Mail','Username','Name','Lastname','Password','Birthday','Gym')
 
 
 #Unica respuesta
@@ -71,7 +75,7 @@ class_schema = ClassSchema()
 classes_schema = ClassSchema(many=True)
 users_schema = UsersSchema(many=True)
 
-#GET
+#Clases
 @app.route('/classes',methods=['GET'])
 def get_classes():
     all_categorias = Classes.query.all()
@@ -92,6 +96,40 @@ def create_class():
     db.session.add(new_class)
     db.session.commit()
     return classes_schema.jsonify(new_class), 201
+
+#Users
+@app.route('/login', methods=['GET'])
+def get_user():
+    password_got = request.args.get('Password')
+    mail_got = request.args.get('Mail')
+
+    user = Users.query.filter_by(Password=password_got, Mail=mail_got).first()
+
+    if user:
+        result = UsersSchema().dump(user)  
+        return jsonify(result)
+    else:
+        return jsonify({'message': 'Usuario no encontrado'}), 404
+
+
+@app.route('/sign_in', methods=['POST'])
+def create_user():
+    mail = request.json.get('Mail')
+    user_name = request.json.get('Username') 
+    name = request.json.get('Name')
+    lastname = request.json.get('Lastname')
+    password = request.json.get('Password')
+    birthday = request.json.get('Birthday')
+    gym = request.json.get('Gym')
+
+    new_user = Users(Mail=mail,Username=user_name, Name=name, Lastname=lastname, Password=password, Birthday=birthday, Gym=gym)
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return UsersSchema().jsonify(new_user), 201 
+
+
 
 #########################################################
 #########################################################
