@@ -124,7 +124,7 @@ export default function Main_Page() {
       </div>
       <div className="WebApp-Body">
         <div className="Content-Container">
-          {showUsers ? (
+          {showUsers && user ? (
             <div className="Table-Container">
               <table className="Table-Classes">
                 <thead className="Table-Classes-Header">
