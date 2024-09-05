@@ -7,12 +7,39 @@ export default function CreateClass() {
     const [date, setDate] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-  
-    const day = (dateString) => {
-      const date = new Date(dateString);
-      const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-      return daysOfWeek[date.getDay()];
-    };
+    const [gym, setGym] = useState('');
+    
+    const createAccount = async () => {
+    
+        try {
+          const response = await fetch('http://localhost:5000/sign_in', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              Name: name,
+              Lastname: lastName,
+              Mail: email,
+              Birthday: date,
+              Password: password,
+              Gym: gym,
+            }),
+          });
+          if (response.ok) {
+            const data = await response.json();
+            alert("¡Cuenta creada exitosamente!");
+          } else {
+            console.error("Error en la respuesta de la API:", response.statusText);
+            alert("Error al crear la Cuenta ");
+          }
+        } catch (error) {
+          console.log(name,date,hour,day(date),permanent)
+          console.error("Error en el servidor:", error);
+          alert("Error en el servidor");
+        }
+      };
+
 
     return (
     <div className='App'>
@@ -83,6 +110,16 @@ export default function CreateClass() {
                         name="password" 
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)} 
+                    />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="name">Gimansio:</label>
+                    <input 
+                    type="text" 
+                    id="gym" 
+                    name="gym" 
+                    value={gym} 
+                    onChange={(e) => setGym(e.target.value)} 
                     />
                 </div>
                 <button type="submit" className='button_create_account'>
