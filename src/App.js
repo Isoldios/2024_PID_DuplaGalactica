@@ -1,12 +1,12 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Main_Page from './components/Main_Page.jsx';
-import Login from './components/Login.jsx';
-import ClassCreation from './components/ClassCreation.jsx';
-import Create_Account from './components/Create_Account.jsx';
-import Reset_Password from './components/Reset_Password.jsx';
-import New_Password from './components/New_Password.jsx';
+import Main_Page from './Components/Main_Page.jsx';
+import Login from './Components/Login.jsx';
+import ClassCreation from './Components/ClassCreation.jsx';
+import Create_Account from './Components/Create_Account.jsx';
+import Reset_Password from './Components/Reset_Password.jsx';
+import New_Password from './Components/New_Password.jsx';
 
 function App() {
   return (
