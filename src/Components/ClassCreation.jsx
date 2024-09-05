@@ -1,12 +1,13 @@
 import '../App.css';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateClass() {
   const [hour, setHour] = useState('');
   const [permanent, setPermanent] = useState('');
   const [date, setDate] = useState('');
   const [name, setName] = useState('');
-
+  const navigate = useNavigate();
   const day = (dateString) => {
     const date = new Date(dateString);
     const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -31,6 +32,7 @@ export default function CreateClass() {
       });
       if (response.ok) {
         const data = await response.json();
+        navigate('/');
         alert("¡Clase creada exitosamente!");
       } else {
         console.error("Error en la respuesta de la API:", response.statusText);

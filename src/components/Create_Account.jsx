@@ -1,5 +1,6 @@
 import '../App.css';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateClass() {
     const [name, setName] = useState('');
@@ -8,7 +9,10 @@ export default function CreateClass() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [gym, setGym] = useState('');
+    const navigate = useNavigate();
+
     
+
     const createAccount = async () => {
     
         try {
@@ -28,6 +32,7 @@ export default function CreateClass() {
           });
           if (response.ok) {
             const data = await response.json();
+            navigate('/');
             alert("¡Cuenta creada exitosamente!");
           } else {
             console.error("Error en la respuesta de la API:", response.statusText);
@@ -39,7 +44,11 @@ export default function CreateClass() {
           alert("Error en el servidor");
         }
       };
-
+    
+    const postAccount = (e) => {
+    e.preventDefault(); 
+    createAccount();
+    };
 
     return (
     <div className='App'>
@@ -61,7 +70,7 @@ export default function CreateClass() {
         </div>
         <div className='create-account-container'>
             <h2>Crear cuenta</h2>
-            <form >
+            <form onSubmit={postAccount}>
                 <div className="input-container">
                     <label htmlFor="name">Nombre:</label>
                     <input 
