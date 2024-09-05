@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { IconButton } from '@mui/material';
-import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 
 const localizer = momentLocalizer(moment);
 
@@ -16,7 +14,7 @@ const Calendar = ({ events }) => {
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: '100%'}}
+        style={{ height: '100%', background: '#14213D' }}
         views={['month']}
       />
     </div>
@@ -86,9 +84,17 @@ export default function Main_Page() {
       </div>
 
       <div className="Calendar-Button">
-        <IconButton onClick={changeShowCalendar} className="Toggle-Button">
-          {showCalendar ? <ArrowUpward /> : <ArrowDownward />}
-        </IconButton>
+        <button onClick={changeShowCalendar} className="Toggle-Button">
+          {showCalendar ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9L12 15L18 9H6Z" fill="#E5E5E5"/>
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 6L15 12L9 18V6Z" fill="#E5E5E5"/>
+            </svg>
+          )}
+        </button>
       </div>
 
       {showCalendar ? (
