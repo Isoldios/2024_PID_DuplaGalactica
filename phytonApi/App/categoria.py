@@ -6,7 +6,7 @@ from flask_cors import CORS
 
 #configuraciones basicas, cuidado el nombre de la bdd que se conecta
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3306/pid'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3000/pid'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 CORS(app) 

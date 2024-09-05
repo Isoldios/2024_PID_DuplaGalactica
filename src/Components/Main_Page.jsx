@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -61,7 +62,14 @@ const Calendar = () => {
 export default function Main_Page() {
   const [classes, setClasses] = useState([]);
   const [user, setUser] = useState();
-  const [showUsers, setShowUsers] = useState(false); 
+  const [showUsers, setShowUsers] = useState(false);
+  const navigate = useNavigate();
+  const goToLogin = () => {
+    navigate('/login');
+  };
+  const goToCreateClass = () => {
+    navigate('/class-creation');
+  };
 
   const fetchClasses = async () => {
     try {
@@ -177,9 +185,9 @@ export default function Main_Page() {
         </div>
         <div className="Content-Container-Parte-Inferior">
           <img src="/Spining.jpg" className="Image-MainMenu-Slider" />
-          <div className="Text-MainMenu-Slider">aaa</div>
+          <div className="Text-MainMenu-Slider" onClick={goToLogin}>aaa</div>
           <img src="/yoga.png" className="Image-MainMenu-Slider"/>
-          <div className="Text-MainMenu-Slider">Texto a gusto numero 2</div>
+          <div className="Text-MainMenu-Slider" onClick={goToCreateClass}>eee</div>
           <img src="/Boxeo.jpeg" className="Image-MainMenu-Slider" />
           <div className="Text-MainMenu-Slider">Texto a gusto numero 3</div>
         </div>

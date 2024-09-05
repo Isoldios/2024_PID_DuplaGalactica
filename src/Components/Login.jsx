@@ -1,9 +1,17 @@
 import '../App.css';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const goToCreateAccount = () => {
+    navigate('/create-account');
+  };
+  const goToResetPassword = () => {
+    navigate('/reset-password');
+  };
 
   const fetchUser = async () => {
     try {
@@ -70,8 +78,8 @@ export default function Login() {
             Ingresar
           </button>
         </form>
-        <div className='login-options-reset'>Reset Password</div>
-        <div className='login-options-create'>Create Account</div>
+        <div className='login-options-reset' onClick={goToResetPassword}>Reset Password</div>
+        <div className='login-options-create' onClick={goToCreateAccount}>Create Account</div>
       </div>
     </div>
   );
