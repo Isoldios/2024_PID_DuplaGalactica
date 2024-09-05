@@ -1,7 +1,10 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from flask_cors import CORS 
+from flask_cors import CORS
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 #configuraciones basicas, cuidado el nombre de la bdd que se conecta
@@ -132,7 +135,48 @@ def create_user():
 
     return UsersSchema().jsonify(new_user), 201 
 
+def send_email(to_email):
+    try:
+        sender_email = "isoldi772@gmail.com"
+        sender_password = "cyos scck tgtm ortn"
+        subject = "Welcome!"
+        body = "Thank you for signing up!"
 
+        # Set up the email headers
+        msg = MIMEMultipart()
+        msg['From'] = sender_email
+        msg['To'] = to_email
+        msg['Subject'] = subject
+        msg.attach(MIMEText(body, 'plain'))
+
+        # Set up the SMTP server connection
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        text = msg.as_string()
+        
+        # Send the email
+        server.sendmail(sender_email, to_email, text)
+        server.quit()
+
+        return True
+    except Exception as e:
+        print(f"Error sending email: {e}")
+        return False
+
+# Define the route for handling the POST request
+@app.route('/send-email', methods=['POST'])
+def send_email_route():
+    data = request.get_json()
+    email = data.get('email')
+
+    if not email:
+        return jsonify({'error': 'Email is required'}), 400
+
+    if send_email(email):
+        return jsonify({'message': 'Email sent successfully'}), 200
+    else:
+        return jsonify({'error': 'Failed to send email'}), 500
 
 #########################################################
 #########################################################

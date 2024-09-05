@@ -3,6 +3,26 @@ import React, { useState } from 'react';
 
 export default function CreateClass() {
     const [email, setEmail] = useState('');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        // Call the Python backend to send the email
+        try{const response = await fetch('http://localhost:5000/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+    
+        if (response.ok) {
+          alert('Email sent!');
+        } else {
+          alert('Failed to send email.');
+        }
+    }catch(error) {
+        console.error("Error fetching classes:", error);
+      }};
 
     return (
     <div className='App'>
@@ -24,7 +44,7 @@ export default function CreateClass() {
         </div>
         <div className='reset-password-container'>
             <h2>Recuperar cuenta</h2>
-            <form >
+            <form onSubmit={handleSubmit}>
                 <div className="input-container">
                     <label htmlFor="email">Email:</label>
                     <input 
